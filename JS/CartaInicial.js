@@ -1,4 +1,3 @@
-
 (function initHeartsBackground() {
   const existing = document.querySelector('.hearts');
   const container = existing || (function () {
@@ -11,23 +10,21 @@
   function createHeart() {
     const heart = document.createElement('span');
     heart.className = 'heart';
-    heart.textContent = '🍃'; 
-    heart.textContent = '❤️'; 
+    heart.textContent = '❤️';
 
-    const size = Math.floor(Math.random() * 36) + 18; 
+    const size = Math.floor(Math.random() * 36) + 18;
     heart.style.fontSize = size + 'px';
 
-
-    const x = Math.random() * 100; 
+    const x = Math.random() * 100;
     heart.style.left = x + 'vw';
 
-    const duration = (Math.random() * 3) + 3; 
+    const duration = (Math.random() * 3) + 3;
     heart.style.animationDuration = duration + 's';
 
-    const rotate = (Math.random() * 60) - 30; 
+    const rotate = (Math.random() * 60) - 30;
     heart.style.transform = `translate(-50%, 0) rotate(${rotate}deg)`;
 
-    const hue = Math.floor(Math.random() * 60) - 20; 
+    const hue = Math.floor(Math.random() * 60) - 20;
     heart.style.filter = `hue-rotate(${hue}deg)`;
 
     function removeAfterAnimation() {
@@ -48,13 +45,25 @@
   }
 
   const intervalMs = 550;
-  const intervalId = setInterval(() => {
+  let intervalId = setInterval(() => {
     createHeart();
-    const current = container.children.length;
-    if (current > 30) {
+    if (container.children.length > 30) {
       container.removeChild(container.firstElementChild);
     }
   }, intervalMs);
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      clearInterval(intervalId);
+    } else {
+      intervalId = setInterval(() => {
+        createHeart();
+        if (container.children.length > 30) {
+          container.removeChild(container.firstElementChild);
+        }
+      }, intervalMs);
+    }
+  });
 
   window.addEventListener('beforeunload', () => clearInterval(intervalId));
 })();
@@ -74,9 +83,7 @@
     return el;
   })();
 
-  const leaves = ['🍂', '🍃', '🍁', '🌿'];
   const heartEmoji = '❤️';
-
 
   function createLeaf() {
     const span = document.createElement('span');
