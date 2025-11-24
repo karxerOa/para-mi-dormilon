@@ -1,0 +1,180 @@
+.carta {
+  box-sizing: border-box; 
+  width: 100%;
+  max-width: 360px;     
+  height: auto;          
+  padding: 20px;
+  border: 2px solid #000;
+  border-radius: 10px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+ }
+.carta h1{
+  margin: 0;
+  padding: 0;
+  font-family: 'Sevillana', cursive;
+  color: #0d2201;
+}
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+@media (max-width: 600px) {
+  .carta {
+    max-width: 100%;
+    padding: 16px;
+  }
+}
+.carta h1 {
+  font-size: clamp(1.25rem, 3.2vw, 1.5rem); 
+  margin-bottom: 10px;
+}
+.carta p {
+  font-size: clamp(0.95rem, 2.2vw, 1rem);
+  text-align: center;
+  margin: 0 20px;
+}
+
+button {
+     margin-top: 20px;
+     padding: 10px 20px;
+     font-size: 16px;
+     border: none;
+     border-radius: 5px;
+     background-color: #121D0C;
+     color: #fff;
+     cursor: pointer;
+}
+
+@media (max-width: 420px) {
+  .carta p { margin: 0 12px; }
+  button { width: 100%; padding: 12px; font-size: 1rem; }
+}
+
+body {
+  background: linear-gradient(rgba(0,0,0,0.18), rgba(0,0,0,0.18)), url('../Imagenes/flores.jpg') center/cover no-repeat fixed;
+  background-color: #324A2A;
+}
+
+body.page-transition {
+  transition: opacity 420ms ease, transform 420ms ease;
+  will-change: opacity, transform;
+}
+body.page-hidden {
+  opacity: 0;
+  transform: translateY(6px);
+  pointer-events: none;
+}
+
+.carta { 
+  position: relative; 
+  z-index: 2;
+}
+
+.hearts {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.heart {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translate(-50%, 0) scale(1);
+  font-size: 28px;
+  line-height: 1;
+  user-select: none;
+  cursor: pointer;
+  pointer-events: auto; 
+  will-change: transform, opacity;
+  animation-name: floatUp;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(0.9) rotate(0deg);
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-120vh) rotate(20deg) scale(1.05);
+    opacity: 0;
+  }
+}
+
+.heart.pop {
+  transition: transform 0.15s ease, opacity 0.15s ease;
+  transform: scale(1.6);
+  opacity: 0;
+}
+
+
+.falling {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* hojas */
+.leaf {
+  position: absolute;
+  top: -10vh;
+  left: var(--left, 50%);
+  transform: translateX(-50%) rotate(var(--rot, 0deg)) scale(var(--scale, 1));
+  font-size: var(--size, 24px);
+  line-height: 1;
+  opacity: var(--opacity, 0.95);
+  will-change: transform, opacity;
+  animation: fallDown var(--duration, 8s) linear forwards;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,0.12));
+}
+
+
+@keyframes fallDown {
+  0% {
+    transform: translateY(-10vh) translateX(0) rotate(var(--rot, 0deg)) scale(var(--scale, 1));
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(120vh) translateX(var(--drift, 60px)) rotate(calc(var(--rot, 0deg) + 360deg)) scale(var(--scale, 1));
+    opacity: 0;
+  }
+}
+
+.heart {
+  pointer-events: auto;
+  z-index: 1;
+}
+
+.heart.pop {
+  transition: transform 0.15s ease, opacity 0.15s ease;
+  transform: scale(1.6);
+  opacity: 0;
+}
+
+/* móvil */
+@media (max-width: 720px) {
+  body { background-attachment: scroll; background-position: top center; }
+}

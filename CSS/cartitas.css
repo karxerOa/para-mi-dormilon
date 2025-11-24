@@ -1,0 +1,219 @@
+:root {
+  --sage-50: #f6f8f6;
+  --sage-100: #e8ede8;
+  --sage-200: #d4ddd4;
+  --sage-300: #b5c4b5;
+  --sage-400: #8fa38f;
+  --sage-500: #6d856d;
+  --sage-600: #556956;
+  --sage-700: #445545;
+  --sage-800: #364436;
+  --sage-900: #2d372d;
+  --cream: #fdfcf9;
+  --accent: #9db29d;
+  --card-bg: #ffffffcc;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, var(--sage-50) 0%, var(--cream) 50%, var(--sage-100) 100%);
+  min-height: 100vh;
+  color: var(--sage-900);
+  padding: 20px;
+}
+
+.page {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  text-align: center;
+  color: var(--sage-700);
+  margin-bottom: 12px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  margin-top: 8px;
+}
+
+@media (max-width: 800px) {
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+  h1 {
+    font-size: 2.2rem;
+  }
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: 20px;
+  overflow: visible;
+  box-shadow: 0 4px 20px rgba(69, 85, 69, 0.08);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid var(--sage-200);
+  position: relative;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 18px;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(69, 85, 69, 0.15);
+}
+
+.thumb {
+  width: 76px;
+  height: 76px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--sage-100), var(--sage-200));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 76px;
+  color: var(--sage-700);
+  box-shadow: 0 6px 14px rgba(25, 50, 36, 0.06);
+}
+
+.thumb-icon {
+  width: 56px;
+  height: 56px;
+  display: block;
+  object-fit: contain;
+  font-variation-settings: 'FILL' 1, 'wght' 600;
+  font-size: 44px;
+  color: var(--sage-700);
+  display: inline-block;
+}
+
+.meta {
+  flex: 1;
+}
+
+.card h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  color: var(--sage-700);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.card p {
+  color: var(--sage-600);
+  line-height: 1.6;
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+  min-height: 48px;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn {
+  background: var(--sage-600);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Inter', sans-serif;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn:hover {
+  background: var(--sage-700);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(69, 85, 69, 0.2);
+}
+
+.btn.secondary {
+  background: var(--sage-200);
+  color: var(--sage-700);
+}
+
+.btn.secondary:hover {
+  background: var(--sage-300);
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(45, 55, 45, 0.45);
+  backdrop-filter: blur(4px);
+  z-index: 9999;
+  padding: 20px;
+}
+
+.modal[aria-hidden="false"] {
+  display: flex;
+}
+
+.modal-panel {
+  width: min(560px, 100%);
+  background: white;
+  padding: 28px;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(45, 55, 45, 0.2);
+  border: 1px solid var(--sage-200);
+  animation: modalSlideIn 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modal-panel h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  color: var(--sage-700);
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.modal-panel p {
+  color: var(--sage-600);
+  line-height: 1.7;
+  font-size: 1.02rem;
+  margin-bottom: 16px;
+}
+
+.message-body {
+  background: var(--sage-50);
+  padding: 14px;
+  border-radius: 12px;
+  border-left: 4px solid var(--sage-400);
+  margin: 14px 0;
+}

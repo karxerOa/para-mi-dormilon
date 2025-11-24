@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cartitas</title>
+  <link rel="stylesheet" href="../CSS/cartitas.css">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+</head>
+<body>
+  <main class="page" style="max-width:880px;margin:36px auto;padding:20px;">
+    <h1 style="text-align:center;margin-bottom:16px;font-family:'Sevillana',cursive;color:var(--sage-700)">Cartitas</h1>
+    <h2 style="text-align:center;margin-bottom:32px;font-weight:400;color:var(--sage-600)">Recuerda abrir las cartas según cómo te sientas</h2>
+    <div id="cardsContainer" class="cards-grid"></div>
+    <div style="text-align:center;margin-top:20px;">
+      <a class="btn" href="AbrirCarta.html">Volver</a>
+    </div>
+  </main>
+
+  <div id="confirmModal" class="modal" aria-hidden="true" role="dialog">
+    <div class="modal-panel" role="document" aria-labelledby="confirmTitle">
+      <p id="confirmText"></p>
+      <div class="modal-actions">
+        <button id="confirmYes" class="btn">Sí, abrir</button>
+        <button id="confirmNo" class="btn secondary">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="messageModal" class="modal" aria-hidden="true" role="dialog">
+    <div class="modal-panel" role="document" aria-labelledby="messageTitle">
+      <h3 id="messageTitle"></h3>
+      <div class="message-body">
+        <p id="messageBody"></p>
+      </div>
+      <div style="text-align:right;margin-top:12px;">
+        <button id="messageClose" class="btn">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../JS/cartitas.js"></script>
+</body>
+</html>

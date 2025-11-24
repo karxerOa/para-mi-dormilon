@@ -1,0 +1,256 @@
+:root{
+  --g-900:#163822;
+  --g-800:#274e37;
+  --g-700:#386b4a;
+  --g-600:#5a8a66;
+  --g-400:#93bfa2;
+  --g-200:#d8efe0;
+  --bg-card: rgba(255,255,255,0.92);
+  --muted:#5b6b57;
+}
+
+/* ----------- ESTILO GENERAL ----------- */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: rgba(12,54,31,0.06);
+  position: relative;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url('../Imagenes/flores.jpg') center/cover no-repeat fixed;
+  opacity: 5;
+  z-index: 0;
+  pointer-events: none;
+  transform: translateZ(0);
+}
+
+/* ----------- CONTENEDOR PRINCIPAL ----------- */
+.page {
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ----------- TÍTULO PRINCIPAL ----------- */
+.gallery-section h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #053b0e;
+  margin-bottom: 10px;
+  font-weight: 600;
+  font-family: 'Sevillana', cursive;
+}
+
+.gallery-section > p {
+  text-align: center;
+  font-size: 1.1rem;
+  width: 80%;
+  margin: 0 auto 40px;
+  line-height: 1.6;
+  color:#091a0c;
+  background-color: #bcd4c256;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+
+}
+
+/* ----------- GRID DE CARTAS ----------- */
+.gallery-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+/* ----------- TARJETAS ----------- */
+.gallery-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(202, 125, 102, 0.04);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 10, 37, 0.12);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.gallery-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.20);
+}
+
+.gallery-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+  object-position: center;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+@media (max-width: 720px) {
+  .gallery-card img {
+    aspect-ratio: auto;
+    object-fit: contain;
+    max-height: 360px;
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 420px) {
+  .gallery-card img {
+    max-height: 280px;
+  }
+}
+
+/* ----------- TEXTO DE LAS CARTAS ----------- */
+.card-text {
+  padding: 18px 20px;
+}
+
+.card-text h3 {
+  margin: 0 0 10px;
+  font-size: 1.3rem;
+  color:#03330c;
+  font-weight: 600;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.card-text p {
+  margin: 0;
+  font-size: 0.97rem;
+  color:#202c03;
+  line-height: 1.6;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+/* ----------- SECCIÓN FINAL (HERO) ----------- */
+.hero {
+  margin-top: 50px;
+  padding: 40px 20px;
+  background: linear-gradient(180deg, var(--bg-card), rgba(245,250,244,0.98));
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.hero h1 {
+  margin: 0;
+  color: #0C180E;
+  font-size: 2.2rem;
+}
+
+.hero h2 {
+  margin-top: 8px;
+  color: #152918;
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.hero h3 {
+  color: #A4B678;
+  margin-top: 6px;
+  font-size: 1.2rem;
+}
+
+.lead {
+  margin: 15px auto;
+  width: 80%;
+  color: var(--muted);
+}
+
+/* ----------- BOTÓN ----------- */
+.btn {
+  display: inline-block;
+  padding: 12px 22px;
+  background: linear-gradient(180deg,var(--g-700),var(--g-800));
+  color: #fff;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background .25s ease;
+}
+
+.btn:hover {
+  background: #d14f75;
+}
+
+.btn.secondary {
+  background: transparent;
+  color: var(--g-800);
+  border: 2px solid rgba(56,107,74,0.16);
+}
+
+.gallery-card { position: relative; overflow: visible;}
+
+.card-burst {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 6;
+}
+
+.card-burst .burst-item {
+  position: absolute;
+  left: var(--x, 50%);
+  top: var(--y, 50%);
+  transform: translate(-50%, -50%) scale(.6);
+  will-change: transform, opacity;
+  font-size: var(--size, 18px);
+  opacity: 0;
+  animation-name: burstAnim;
+  animation-duration: var(--dur, 800ms);
+  animation-timing-function: cubic-bezier(.2,.8,.2,1);
+  animation-fill-mode: forwards;
+  user-select: none;
+  filter: drop-shadow(0 6px 8px rgba(0,0,0,0.12));
+}
+
+@keyframes burstAnim {
+  0% {
+    transform: translate(-50%, -50%) scale(0.6) rotate(0deg);
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(calc(-50% + var(--dx, 0px)), calc(-50% + var(--dy, -80px))) scale(1.15) rotate(var(--rot, 30deg));
+    opacity: 0;
+  }
+}
+
+.card-burst.small .burst-item { font-size: calc(var(--size,18px) * 0.9); }
+
+/* ----------- TRANSICIÓN DE PÁGINAS ----------- */
+body.page-transition {
+  transition: opacity 420ms ease, transform 420ms ease;
+  will-change: opacity, transform;
+}
+body.page-hidden {
+  opacity: 0;
+  transform: translateY(6px);
+  pointer-events: none;
+}
+
+h1 {
+ font-family: 'Sevillana', cursive;
+}
+
+/* móvil: desactivar fixed para evitar saltos en iOS/Android */
+@media (max-width: 720px) {
+  body {
+    background-attachment: scroll;
+    background-position: top center;
+  }
+}
