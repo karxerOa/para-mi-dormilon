@@ -61,7 +61,7 @@ button {
 }
 
 body {
-  background: linear-gradient(rgba(0,0,0,0.18), rgba(0,0,0,0.18)), url('../Imagenes/flores.jpg') center/cover no-repeat fixed;
+  background: linear-gradient(rgba(0,0,0,0.18), rgba(0,0,0,0.18)), url('../Imagenes/fondo1.jpg') center/cover no-repeat fixed;
   background-color: #324A2A;
 }
 

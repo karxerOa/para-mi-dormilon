@@ -1,7 +1,7 @@
 :root{
-  --g-900:#163822;
+  --g-900:#021a0a;
   --g-800:#274e37;
-  --g-700:#386b4a;
+  --g-700:#000000;
   --g-600:#5a8a66;
   --g-400:#93bfa2;
   --g-200:#d8efe0;
@@ -24,8 +24,9 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: url('../Imagenes/flores.jpg') center/cover no-repeat fixed;
-  opacity: 5;
+  background: url('../Imagenes/fondo3.jpg') center/cover no-repeat fixed;
+  opacity: 0.5;
+  backdrop-filter: blur(4px);
   z-index: 0;
   pointer-events: none;
   transform: translateZ(0);
@@ -120,7 +121,7 @@ body::before {
 .card-text h3 {
   margin: 0 0 10px;
   font-size: 1.3rem;
-  color:#03330c;
+  color:#ffffff;
   font-weight: 600;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
@@ -157,7 +158,7 @@ body::before {
 }
 
 .hero h3 {
-  color: #A4B678;
+  color: #074126;
   margin-top: 6px;
   font-size: 1.2rem;
 }
@@ -181,7 +182,7 @@ body::before {
 }
 
 .btn:hover {
-  background: #d14f75;
+  background: #7c9285;
 }
 
 .btn.secondary {
