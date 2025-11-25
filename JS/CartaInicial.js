@@ -3,6 +3,10 @@
   const container = existing || (function () {
     const el = document.createElement('div');
     el.className = 'hearts';
+    el.style.position = 'fixed';
+    el.style.inset = '0';
+    el.style.pointerEvents = 'none';
+    el.style.zIndex = '0';
     document.body.appendChild(el);
     return el;
   })();
@@ -11,21 +15,15 @@
     const heart = document.createElement('span');
     heart.className = 'heart';
     heart.textContent = '❤️';
-
-    const size = Math.floor(Math.random() * 36) + 18;
+    const size = Math.floor(Math.random() * 24) + 18;
     heart.style.fontSize = size + 'px';
-
     const x = Math.random() * 100;
     heart.style.left = x + 'vw';
-
     const duration = (Math.random() * 3) + 3;
     heart.style.animationDuration = duration + 's';
-
-    const rotate = (Math.random() * 60) - 30;
+    const rotate = (Math.random() * 40) - 20;
     heart.style.transform = `translate(-50%, 0) rotate(${rotate}deg)`;
-
-    const hue = Math.floor(Math.random() * 60) - 20;
-    heart.style.filter = `hue-rotate(${hue}deg)`;
+    heart.style.pointerEvents = 'auto';
 
     function removeAfterAnimation() {
       heart.removeEventListener('animationend', removeAfterAnimation);
@@ -44,28 +42,55 @@
     container.appendChild(heart);
   }
 
-  const intervalMs = 550;
-  let intervalId = setInterval(() => {
-    createHeart();
-    if (container.children.length > 30) {
-      container.removeChild(container.firstElementChild);
-    }
-  }, intervalMs);
+  // controls
+  const MIN_MS = 700;            // no crear más frecuentemente
+  const MAX_ACTIVE = 12;        // máximo corazones en DOM
+  let lastCreate = 0;
+  let running = true;
+  let isScrolling = false;
 
+  function loop(now) {
+    if (!running) return;
+    if (!document.hidden && !isScrolling && (now - lastCreate) >= MIN_MS) {
+      if (container.children.length < MAX_ACTIVE) {
+        createHeart();
+        lastCreate = now;
+      }
+    }
+    requestAnimationFrame(loop);
+  }
+
+  let raf = requestAnimationFrame(loop);
+
+  // pausar durante scroll/touch para mejorar rendimiento
+  let scrollTimer = null;
+  function onScroll() {
+    isScrolling = true;
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(() => { isScrolling = false; }, 160);
+  }
+  document.addEventListener('scroll', onScroll, { passive: true });
+  document.addEventListener('touchmove', onScroll, { passive: true });
+
+  // visibilidad
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
-      clearInterval(intervalId);
+      running = false;
     } else {
-      intervalId = setInterval(() => {
-        createHeart();
-        if (container.children.length > 30) {
-          container.removeChild(container.firstElementChild);
-        }
-      }, intervalMs);
+      if (!running) {
+        running = true;
+        lastCreate = performance.now();
+        raf = requestAnimationFrame(loop);
+      }
     }
   });
 
-  window.addEventListener('beforeunload', () => clearInterval(intervalId));
+  // limpieza
+  window.addEventListener('beforeunload', () => {
+    running = false;
+    cancelAnimationFrame(raf);
+    clearTimeout(scrollTimer);
+  });
 })();
 
 (function initFallingScene() {

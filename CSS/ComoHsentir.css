@@ -13,23 +13,40 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: rgba(12,54,31,0.06);
   position: relative;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: none;
 }
 
-body::before {
-  content: "";
+/* fondo fijo como elemento independiente (estático) */
+.bg-fixed {
   position: fixed;
   inset: 0;
-  background: url('../Imagenes/fondo3.jpg') center/cover no-repeat fixed;
+  background-image: url('../Imagenes/fondo3.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   opacity: 0.5;
-  backdrop-filter: blur(4px);
   z-index: 0;
   pointer-events: none;
   transform: translateZ(0);
+  will-change: transform;
+}
+
+/* overlays y contenido por encima */
+.hearts {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.page {
+  position: relative;
+  z-index: 2;
 }
 
 /* ----------- CONTENEDOR PRINCIPAL ----------- */
@@ -38,7 +55,7 @@ body::before {
   margin: auto;
   padding: 20px;
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 /* ----------- TÍTULO PRINCIPAL ----------- */
